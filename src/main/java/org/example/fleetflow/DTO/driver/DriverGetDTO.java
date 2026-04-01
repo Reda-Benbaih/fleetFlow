@@ -1,12 +1,13 @@
-package org.example.fleetflow.DTO;
+package org.example.fleetflow.DTO.driver;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
-public class ClientDTO {
+@Getter
+@Setter
+public class DriverGetDTO {
     private Integer id;
     private String name;
-    private String email;
     private Long number;
+    private Boolean available;
 }

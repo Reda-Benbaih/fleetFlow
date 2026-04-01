@@ -16,9 +16,9 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String deliveryDate;
-    private LocalDate startAddress;
-    private LocalDate endAddress;
+    private LocalDate deliveryDate;
+    private String startAddress;
+    private String endAddress;
 
     @Enumerated(EnumType.STRING)
     private DeliveryStatus deliveryStatus;
