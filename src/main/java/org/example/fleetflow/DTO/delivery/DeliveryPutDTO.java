@@ -14,4 +14,8 @@ public class DeliveryPutDTO {
     private String endAddress;
     private DeliveryStatus deliveryStatus;
 
+    private Integer clientId;
+    private Integer driverId;
+    private Integer vehicleId;
+
 }

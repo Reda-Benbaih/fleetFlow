@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = " delivery")
+@Table(name = "delivery")
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Delivery {
     @Id
@@ -32,6 +32,6 @@ public class Delivery {
     private Driver driver;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 }

@@ -13,4 +13,8 @@ public class DeliveryPostDTO {
     private String startAddress;
     private String endAddress;
     private DeliveryStatus deliveryStatus;
+
+    private Integer clientId;
+    private Integer driverId;
+    private Integer vehicleId;
 }
