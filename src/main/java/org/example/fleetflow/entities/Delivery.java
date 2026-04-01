@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class Delivery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String deliveryDate;
     private LocalDate startAddress;

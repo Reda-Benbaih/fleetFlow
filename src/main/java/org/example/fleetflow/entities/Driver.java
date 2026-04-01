@@ -14,13 +14,13 @@ import java.util.List;
 public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String name;
-    private long number;
+    private Long number;
     private String licenceType;
-    private boolean available;
+    private Boolean available;
 
-    @OneToMany(mappedBy = "delivery",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "driver",cascade = CascadeType.PERSIST)
     private List<Delivery> deliveries;
 }

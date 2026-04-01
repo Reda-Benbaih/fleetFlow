@@ -14,15 +14,15 @@ import java.util.List;
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String registrationNumber;
     private String type;
-    private int capacity;
+    private Integer capacity;
 
     @Enumerated(EnumType.STRING)
     private VehicleStatus vehicleStatus;
 
-    @OneToMany(mappedBy = "delivery",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "vehicle",cascade = CascadeType.PERSIST)
     private List<Delivery> deliveries;
 }

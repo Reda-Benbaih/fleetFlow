@@ -14,13 +14,13 @@ import java.util.List;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id ;
+    private Integer id ;
 
     private String name;
     private String email;
     private String city;
-    private long number;
+    private Long number;
 
-    @OneToMany(mappedBy = "delivery",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client",cascade = CascadeType.PERSIST)
     private List<Delivery> deliveries;
 }
