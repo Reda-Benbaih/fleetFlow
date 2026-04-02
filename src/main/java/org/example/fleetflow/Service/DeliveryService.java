@@ -1,4 +1,17 @@
 package org.example.fleetflow.Service;
 
-public class DeliveryService {
+
+import org.springframework.stereotype.Service;
+
+@Service
+static class DeliveryService {
+
+
+
+
+
+
+
+
 }
+
