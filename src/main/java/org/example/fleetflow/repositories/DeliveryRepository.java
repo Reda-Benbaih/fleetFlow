@@ -13,13 +13,13 @@ import java.util.List;
 @Repository
 public interface DeliveryRepository extends JpaRepository<Delivery,Integer> {
 
-  List<Delivery> finByStatus(DeliveryStatus status);
+  List<Delivery> findByDeliveryStatus(DeliveryStatus status);
   List<Delivery> findByClientId(Integer id);
 
 
   @Query("SELECT d FROM Delivery d " +
-          "WHERE d.deliveryDate BETWEEN :beguinDate AND :EndDate")
-  List<Delivery> findDeliveryEntreDeuxDates(@Param("Beguindate") LocalDate dateDebut,
+          "WHERE d.deliveryDate BETWEEN :BeginDate AND :EndDate")
+  List<Delivery> findDeliveryEntreDeuxDates(@Param("BeginDate") LocalDate dateDebut,
                                                @Param("EndDate") LocalDate dateFin);
 
  @Query(" SELECT d FROM Delivery d" +
