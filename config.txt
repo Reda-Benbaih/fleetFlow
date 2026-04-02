@@ -1,0 +1,25 @@
+Dockerfile
+"
+FROM eclipse-temurin:21-jdk
+
+WORKDIR /app
+
+COPY target/fleetFlow-0.0.1-SNAPSHOT.jar app.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
+"
+
+
+Générer le jar de l’application
+
+.\mvnw.cmd clean package -DskipTests
+
+
+Construire l’image Docker
+
+docker build -t fleetflow-app .
+
+docker images

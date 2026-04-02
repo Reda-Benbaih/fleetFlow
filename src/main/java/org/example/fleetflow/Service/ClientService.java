@@ -32,8 +32,6 @@ public class ClientService {
 
   }
 
-
-
     public ClientGetDTO getClientById(Integer id) {
         Client client = clientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Client introuvable avec l'id : " + id));
@@ -51,18 +49,12 @@ public class ClientService {
     }
 
 
-
     public void deleteClient(Integer id) {
         Client client = clientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Client introuvable avec l'id : " + id));
 
         clientRepository.delete(client);
     }
-
-
-
-
-
 
 
 
