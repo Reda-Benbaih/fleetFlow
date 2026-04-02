@@ -1,4 +1,4 @@
-package org.example.fleetflow.controllers;
+package org.example.fleetflow.Controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.fleetflow.DTO.vehicle.VehicleGetDTO;
