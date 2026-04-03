@@ -18,3 +18,8 @@ public interface ClientMapper {
     //put
     void updateEntityFromPutDTO(ClientPutDTO clientPutDTO,@MappingTarget Client client);
 }
+
+
+
+
+
