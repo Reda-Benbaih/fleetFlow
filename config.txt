@@ -23,3 +23,21 @@ Construire l’image Docker
 docker build -t fleetflow-app .
 
 docker images
+
+CREATION DE NEETWORK DOCKER
+docker network create fleetflow-network
+
+
+
+LANSEMENT DU CONTINNER AVEC MYSQL CONTANNER
+docker run -d   --name app   --network fleetflow-network  -e SPRING_DATASOURCE_URL=jdbc:mysql://fleetflow-mysql:3306/fleetflow  -e SPRING_DATASOURCE_USERNAME=root   -e SPRING_DATASOURCE_PASSWORD=123456789 -p 8082:8082  fleetflow-app
+
+
+
+    tester
+
+
+    http://localhost:8082
+
+    http://localhost:8082/swagger-ui/index.html
+

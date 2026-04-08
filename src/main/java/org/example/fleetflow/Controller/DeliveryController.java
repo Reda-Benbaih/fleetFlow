@@ -1,5 +1,6 @@
 package org.example.fleetflow.Controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.example.fleetflow.DTO.delivery.DeliveryGetDTO;
 import org.example.fleetflow.DTO.delivery.DeliveryPostDTO;
@@ -18,7 +19,7 @@ public class DeliveryController {
     private final DeliveryService deliveryService;
 
     @PostMapping
-    public DeliveryGetDTO ajouterDelivery(@RequestBody DeliveryPostDTO deliveryPostDTO) {
+    public DeliveryGetDTO ajouterDelivery(@Valid @RequestBody DeliveryPostDTO deliveryPostDTO) {
         return deliveryService.ajouterDelivery(deliveryPostDTO);
     }
 
@@ -34,7 +35,7 @@ public class DeliveryController {
 
     @PutMapping("/{id}")
     public DeliveryGetDTO updateDelivery(@PathVariable Integer id,
-                                         @RequestBody DeliveryPutDTO deliveryPutDTO) {
+                                         @Valid @RequestBody DeliveryPutDTO deliveryPutDTO) {
         return deliveryService.updateDelivery(id, deliveryPutDTO);
     }
 

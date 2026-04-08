@@ -1,5 +1,6 @@
 package org.example.fleetflow.Controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.fleetflow.DTO.driver.DriverGetDTO;
 import org.example.fleetflow.DTO.driver.DriverPostDTO;
@@ -23,13 +24,13 @@ public class DriverController {
     }
 
     @PostMapping
-    public ResponseEntity<DriverGetDTO> createDriver(@RequestBody DriverPostDTO postDTO) {
+    public ResponseEntity<DriverGetDTO> createDriver(@Valid @RequestBody DriverPostDTO postDTO) {
         DriverGetDTO savedDriver = driverService.saveDriver(postDTO);
         return new ResponseEntity<>(savedDriver, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DriverGetDTO> updateDriver(@PathVariable Integer id, @RequestBody DriverPutDTO putDTO) {
+    public ResponseEntity<DriverGetDTO> updateDriver(@PathVariable Integer id,@Valid @RequestBody DriverPutDTO putDTO) {
         return ResponseEntity.ok(driverService.updateDriver(id, putDTO));
     }
 

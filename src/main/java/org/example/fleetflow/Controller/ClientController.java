@@ -1,5 +1,6 @@
 package org.example.fleetflow.Controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.example.fleetflow.DTO.client.ClientGetDTO;
 import org.example.fleetflow.DTO.client.ClientPostDTO;
@@ -17,7 +18,7 @@ public class ClientController {
     private final ClientService clientService;
 
     @PostMapping
-    public ClientGetDTO ajouterClient(@RequestBody ClientPostDTO clientPostDTO) {
+    public ClientGetDTO ajouterClient(@Valid @RequestBody ClientPostDTO clientPostDTO) {
         return clientService.ajouterClient(clientPostDTO);
     }
 
@@ -33,7 +34,7 @@ public class ClientController {
 
     @PutMapping("/{id}")
     public ClientGetDTO updateClient(@PathVariable Integer id,
-                                     @RequestBody ClientPutDTO clientPutDTO) {
+                                    @Valid @RequestBody ClientPutDTO clientPutDTO) {
         return clientService.updateClient(id, clientPutDTO);
     }
 

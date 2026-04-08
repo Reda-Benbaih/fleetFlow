@@ -14,4 +14,5 @@ public class DeliveryGetDTO {
     private String startAddress;
     private String endAddress;
     private DeliveryStatus deliveryStatus;
+
 }
