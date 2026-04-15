@@ -21,6 +21,6 @@ public interface DeliveryMapper {
     @Mapping(target = "client", ignore = true)
     @Mapping(target = "driver", ignore = true)
     @Mapping(target = "vehicle", ignore = true)
-    void updateEntityFromPutDTO(DeliveryPutDTO deliveryPutDTO , @MappingTarget Delivery delivery);
+    Delivery updateEntityFromPutDTO(DeliveryPutDTO deliveryPutDTO , @MappingTarget Delivery delivery);
 
 }

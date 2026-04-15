@@ -2,6 +2,7 @@ package org.example.fleetflow.Service;
 
 import org.example.fleetflow.DTO.delivery.DeliveryGetDTO;
 import org.example.fleetflow.DTO.delivery.DeliveryPostDTO;
+import org.example.fleetflow.DTO.delivery.DeliveryPutDTO;
 import org.example.fleetflow.entities.*;
 import org.example.fleetflow.mapper.DeliveryMapper;
 import org.example.fleetflow.repositories.ClientRepository;
@@ -39,11 +40,14 @@ class DeliveryServiceTest {
     @InjectMocks
     private DeliveryService deliveryService;
 
+    DeliveryPutDTO deliveryPutDTO;
+    DeliveryGetDTO deliveryGetDTOChanged;
     DeliveryPostDTO deliveryPostDTO;
     Delivery delivery;
     Client client;
     Driver driver;
     Vehicle vehicle;
+    Delivery deliveryChanged;
 
     @BeforeEach
     void setup(){
@@ -64,11 +68,35 @@ class DeliveryServiceTest {
                 .deliveryStatus(DeliveryStatus.IN_PROGRESS)
                 .build();
 
+        deliveryPutDTO = DeliveryPutDTO.builder()
+                .deliveryDate(LocalDate.now())
+                .startAddress("start")
+                .endAddress("end")
+                .deliveryStatus(DeliveryStatus.DELIVERED)
+                .clientId(1)
+                .driverId(1)
+                .vehicleId(1)
+                .build();
+
+        deliveryGetDTOChanged = DeliveryGetDTO.builder()
+                .deliveryDate(LocalDate.now())
+                .startAddress("start")
+                .endAddress("end")
+                .deliveryStatus(DeliveryStatus.DELIVERED)
+                .build();
+
         delivery = Delivery.builder()
                 .deliveryDate(LocalDate.now())
                 .startAddress("start")
                 .endAddress("end")
                 .deliveryStatus(DeliveryStatus.IN_PROGRESS)
+                .build();
+
+        deliveryChanged = Delivery.builder()
+                .deliveryDate(LocalDate.now())
+                .startAddress("start")
+                .endAddress("end")
+                .deliveryStatus(DeliveryStatus.DELIVERED)
                 .build();
 
         client = Client.builder()
@@ -117,7 +145,22 @@ class DeliveryServiceTest {
 
     @Test
     void updateDeliveryStatusTest(){
+        when(deliveryRepository.findById(1)).thenReturn(Optional.ofNullable(delivery));
+        when(deliveryMapper.updateEntityFromPutDTO(deliveryPutDTO,delivery)).thenReturn(delivery);
+        when(clientRepository.findById(client.getId())).thenReturn(Optional.ofNullable(client));
+        when(driverRepository.findById(driver.getId())).thenReturn(Optional.ofNullable(driver));
+        when(vehicleRepository.findById(vehicle.getId())).thenReturn(Optional.ofNullable(vehicle));
 
+        delivery.setClient(client);
+        delivery.setDriver(driver);
+        delivery.setVehicle(vehicle);
+
+        when(deliveryRepository.save(delivery)).thenReturn(deliveryChanged);
+        when(deliveryMapper.toGetDTO(deliveryChanged)).thenReturn(deliveryGetDTOChanged);
+
+        DeliveryGetDTO result = deliveryService.updateDelivery(1,deliveryPutDTO);
+
+        assertEquals(deliveryChanged.getDeliveryStatus(),result.getDeliveryStatus());
     }
 
 
