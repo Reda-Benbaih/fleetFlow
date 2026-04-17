@@ -32,7 +32,7 @@ docker network create fleetflow-network
 LANSEMENT DU CONTINNER AVEC MYSQL CONTANNER
 docker run -d   --name app   --network fleetflow-network  -e SPRING_DATASOURCE_URL=jdbc:mysql://fleetflow-mysql:3306/fleetflow  -e SPRING_DATASOURCE_USERNAME=root   -e SPRING_DATASOURCE_PASSWORD=123456789 -p 8082:8082  fleetflow-app
 
-
+ docker run -d --name fleetflow-mysql --network fleetflow-network -e MYSQL_ROOT_PASSWORD=123456789 -e MYSQL_DATABASE=fleetflow -p 3306:3306 mysql:8.0
 
     tester
 

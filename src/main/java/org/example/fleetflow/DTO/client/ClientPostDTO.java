@@ -2,6 +2,7 @@ package org.example.fleetflow.DTO.client;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +19,6 @@ public class ClientPostDTO {
     @NotBlank(message = "la ville est obligatoire ")
     private String city;
 
-    @NotBlank(message = "le numero de telephone est oblegatoire")
+    @NotNull(message = "le numero de telephone est oblegatoire")
     private Long number;
 }
