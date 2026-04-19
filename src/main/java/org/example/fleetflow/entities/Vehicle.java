@@ -1,16 +1,14 @@
 package org.example.fleetflow.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "vehicle")
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Builder
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
