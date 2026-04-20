@@ -2,6 +2,7 @@ package org.example.fleetflow.DTO.delivery;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.fleetflow.entities.DeliveryStatus;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
 public class DeliveryPostDTO {
     @NotNull(message = "La date de livraison est obligatoire")
     private LocalDate deliveryDate;
