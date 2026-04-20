@@ -1,15 +1,13 @@
 package org.example.fleetflow.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "delivery")
+@Builder
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
 public class Delivery {
     @Id
