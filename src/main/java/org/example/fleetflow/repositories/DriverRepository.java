@@ -9,4 +9,8 @@ import java.util.List;
 @Repository
 public interface DriverRepository extends JpaRepository<Driver,Integer> {
     List<Driver> findByAvailableTrue();
+//    List<Driver> findByLicenceTypeAndAvailableIsTrue(String licenceType);
+
+//    List<Driver> findAllByOrderByNameAsc();
+
 }

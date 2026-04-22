@@ -7,7 +7,7 @@ services:
       MYSQL_DATABASE: fleetflow
       MYSQL_ROOT_PASSWORD: 123456789
     ports:
-      - "3307:3306"
+      - "3308:33308"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
