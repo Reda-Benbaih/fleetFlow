@@ -15,6 +15,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
     List<Vehicle> findByCapacityGreaterThan(Integer capacity);
 
 //    List<Vehicle> findByVehicleStatusAndCapacityGreaterThan(VehicleStatus vehicleStatus,Integer capacity);
-
+//
 //    List<Vehicle> findAllByOrderByCapacity(Integer capacity);
 }
