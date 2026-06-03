@@ -9,6 +9,8 @@ import org.example.fleetflow.entities.Vehicle;
 import org.example.fleetflow.entities.VehicleStatus;
 import org.example.fleetflow.mapper.VehicleMapper;
 import org.example.fleetflow.repositories.VehicleRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,10 +31,9 @@ public class VehicleService {
     }
 
     @Transactional
-    public List<VehicleGetDTO> getAllVehicle(){
-        return vehicleRepository.findAll().stream()
-                .map(vehicle -> vehicleMapper.toGetDTO(vehicle))
-                .toList();
+    public Page<VehicleGetDTO> getAllVehicle(Pageable pageable){
+        return vehicleRepository.findAll(pageable)
+                .map(vehicle -> vehicleMapper.toGetDTO(vehicle));
     }
 
     public VehicleGetDTO updateVehicle(Integer id, VehiclePutDTO vehiclePutDTO){

@@ -7,6 +7,8 @@ import org.example.fleetflow.DTO.vehicle.VehiclePostDTO;
 import org.example.fleetflow.DTO.vehicle.VehiclePutDTO;
 import org.example.fleetflow.entities.VehicleStatus;
 import org.example.fleetflow.Service.VehicleService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +23,8 @@ public class VehicleController {
     private final VehicleService vehicleService;
 
     @GetMapping
-    public ResponseEntity<List<VehicleGetDTO>> getAllVehicles() {
-        return ResponseEntity.ok(vehicleService.getAllVehicle());
+    public ResponseEntity<Page<VehicleGetDTO>> getAllVehicles(Pageable pageable) {
+        return ResponseEntity.ok(vehicleService.getAllVehicle(pageable));
     }
 
     @PostMapping
