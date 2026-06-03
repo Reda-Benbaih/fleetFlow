@@ -10,7 +10,9 @@ import org.example.fleetflow.entities.VehicleStatus;
 import org.example.fleetflow.mapper.VehicleMapper;
 import org.example.fleetflow.repositories.VehicleRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +33,11 @@ public class VehicleService {
     }
 
     @Transactional
-    public Page<VehicleGetDTO> getAllVehicle(Pageable pageable){
+    public Page<VehicleGetDTO> getAllVehicle(int page ,int size,String sort,String type){
+        Sort sortby = type.equalsIgnoreCase("desc") ? Sort.by(sort).descending() : Sort.by(sort).ascending();
+
+        Pageable pageable = PageRequest.of(page,size,sortby);
+
         return vehicleRepository.findAll(pageable)
                 .map(vehicle -> vehicleMapper.toGetDTO(vehicle));
     }

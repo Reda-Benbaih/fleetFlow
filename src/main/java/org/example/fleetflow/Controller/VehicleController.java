@@ -23,8 +23,13 @@ public class VehicleController {
     private final VehicleService vehicleService;
 
     @GetMapping
-    public ResponseEntity<Page<VehicleGetDTO>> getAllVehicles(Pageable pageable) {
-        return ResponseEntity.ok(vehicleService.getAllVehicle(pageable));
+    public ResponseEntity<Page<VehicleGetDTO>> getAllVehicles(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "asc") String type
+    ) {
+        return ResponseEntity.ok(vehicleService.getAllVehicle(page, size, sort, type));
     }
 
     @PostMapping
