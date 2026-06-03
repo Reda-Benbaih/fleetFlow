@@ -13,6 +13,8 @@ import org.example.fleetflow.repositories.ClientRepository;
 import org.example.fleetflow.repositories.DeliveryRepository;
 import org.example.fleetflow.repositories.DriverRepository;
 import org.example.fleetflow.repositories.VehicleRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -48,11 +50,9 @@ public class DeliveryService {
         return deliveryMapper.toGetDTO(savedDelivery);
     }
 
-    public List<DeliveryGetDTO> getAllDeliveries() {
-        return deliveryRepository.findAll()
-                .stream()
-                .map(deliveryMapper::toGetDTO)
-                .toList();
+    public Page<DeliveryGetDTO> getAllDeliveries(Pageable pageable) {
+        return deliveryRepository.findAll(pageable)
+                .map(deliveryMapper::toGetDTO);
     }
 
     public DeliveryGetDTO getDeliveryById(Integer id) {
