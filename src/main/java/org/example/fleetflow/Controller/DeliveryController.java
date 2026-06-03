@@ -26,8 +26,13 @@ public class DeliveryController {
     }
 
     @GetMapping
-    public Page<DeliveryGetDTO> getAllDeliveries(Pageable pageable) {
-        return deliveryService.getAllDeliveries(pageable);
+    public Page<DeliveryGetDTO> getAllDeliveries(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "asc") String type
+    ) {
+        return deliveryService.getAllDeliveries(page, size, sort, type);
     }
 
     @GetMapping("/{id}")
