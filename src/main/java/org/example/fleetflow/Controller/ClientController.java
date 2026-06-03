@@ -6,6 +6,8 @@ import org.example.fleetflow.DTO.client.ClientGetDTO;
 import org.example.fleetflow.DTO.client.ClientPostDTO;
 import org.example.fleetflow.DTO.client.ClientPutDTO;
 import org.example.fleetflow.Service.ClientService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +25,8 @@ public class ClientController {
     }
 
     @GetMapping
-    public List<ClientGetDTO> getAllClient() {
-        return clientService.getAllClient();
+    public Page<ClientGetDTO> getAllClient(Pageable pageable) {
+        return clientService.getAllClient(pageable);
     }
 
     @GetMapping("/{id}")

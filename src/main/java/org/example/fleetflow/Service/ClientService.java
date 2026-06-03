@@ -7,9 +7,13 @@ import org.example.fleetflow.DTO.client.ClientPutDTO;
 import org.example.fleetflow.entities.Client;
 import org.example.fleetflow.mapper.ClientMapper;
 import org.example.fleetflow.repositories.ClientRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static sun.awt.image.MultiResolutionCachedImage.map;
 
 
 @Service
@@ -28,11 +32,9 @@ public class ClientService {
                                         }
 
 
-  public List<ClientGetDTO> getAllClient(){
-      return clientRepository.findAll()
-              .stream().map(client->clientMapper.toGetDTO(client)).toList();
-
-
+  public Page<ClientGetDTO> getAllClient(Pageable pageable){
+      return clientRepository.findAll(pageable).
+              map(clientMapper::toGetDTO);
   }
 
     public ClientGetDTO getClientById(Integer id) {
