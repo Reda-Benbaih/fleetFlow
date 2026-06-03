@@ -6,6 +6,8 @@ import org.example.fleetflow.DTO.driver.DriverGetDTO;
 import org.example.fleetflow.DTO.driver.DriverPostDTO;
 import org.example.fleetflow.DTO.driver.DriverPutDTO;
 import org.example.fleetflow.Service.DriverService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +21,8 @@ public class DriverController {
     private final DriverService driverService;
 
     @GetMapping
-    public ResponseEntity<List<DriverGetDTO>> getAllDrivers(){
-        return ResponseEntity.ok(driverService.getAllDrivers());
+    public ResponseEntity<Page<DriverGetDTO>> getAllDrivers(Pageable pageable){
+        return ResponseEntity.ok(driverService.getAllDrivers(pageable));
     }
 
     @PostMapping

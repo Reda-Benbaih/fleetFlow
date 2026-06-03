@@ -8,6 +8,8 @@ import org.example.fleetflow.DTO.driver.DriverPutDTO;
 import org.example.fleetflow.entities.Driver;
 import org.example.fleetflow.mapper.DriverMapper;
 import org.example.fleetflow.repositories.DriverRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,10 +28,9 @@ public class DriverService {
     }
 
     @Transactional
-    public List<DriverGetDTO> getAllDrivers(){
-        return driverRepository.findAll().stream()
-                .map(driver -> driverMapper.toGetDTO(driver))
-                .toList();
+    public Page<DriverGetDTO> getAllDrivers(Pageable pageable){
+        return driverRepository.findAll(pageable)
+                .map(driverMapper::toGetDTO);
     }
 
     public DriverGetDTO updateDriver(Integer id, DriverPutDTO driverPutDTO){
