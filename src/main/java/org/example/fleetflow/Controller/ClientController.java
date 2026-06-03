@@ -25,8 +25,13 @@ public class ClientController {
     }
 
     @GetMapping
-    public Page<ClientGetDTO> getAllClient(Pageable pageable) {
-        return clientService.getAllClient(pageable);
+    public Page<ClientGetDTO> getAllClient(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "asc") String type
+    ) {
+        return clientService.getAllClient(page, size, sort, type);
     }
 
     @GetMapping("/{id}")

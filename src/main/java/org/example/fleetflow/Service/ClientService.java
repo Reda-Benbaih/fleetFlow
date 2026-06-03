@@ -8,7 +8,9 @@ import org.example.fleetflow.entities.Client;
 import org.example.fleetflow.mapper.ClientMapper;
 import org.example.fleetflow.repositories.ClientRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -30,7 +32,11 @@ public class ClientService {
                                         }
 
 
-  public Page<ClientGetDTO> getAllClient(Pageable pageable){
+  public Page<ClientGetDTO> getAllClient(int page , int size , String sort,String type){
+
+      Sort sortby = type.equalsIgnoreCase("desc") ? Sort.by(sort).descending() : Sort.by(sort).ascending();
+
+      Pageable pageable = PageRequest.of(page,size,sortby);
       return clientRepository.findAll(pageable).
               map(clientMapper::toGetDTO);
   }
