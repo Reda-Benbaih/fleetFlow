@@ -21,8 +21,13 @@ public class DriverController {
     private final DriverService driverService;
 
     @GetMapping
-    public ResponseEntity<Page<DriverGetDTO>> getAllDrivers(Pageable pageable){
-        return ResponseEntity.ok(driverService.getAllDrivers(pageable));
+    public ResponseEntity<Page<DriverGetDTO>> getAllDrivers(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sort,
+            @RequestParam(defaultValue = "asc") String type
+    ){
+        return ResponseEntity.ok(driverService.getAllDrivers(page, size, sort, type));
     }
 
     @PostMapping

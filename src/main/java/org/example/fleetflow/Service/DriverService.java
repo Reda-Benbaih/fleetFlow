@@ -9,7 +9,9 @@ import org.example.fleetflow.entities.Driver;
 import org.example.fleetflow.mapper.DriverMapper;
 import org.example.fleetflow.repositories.DriverRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +30,12 @@ public class DriverService {
     }
 
     @Transactional
-    public Page<DriverGetDTO> getAllDrivers(Pageable pageable){
+    public Page<DriverGetDTO> getAllDrivers(int page ,int size,String sort,String type){
+
+        Sort sortby = type.equalsIgnoreCase("desc") ? Sort.by(sort).descending() : Sort.by(sort).ascending();
+
+        Pageable pageable = PageRequest.of(page,size,sortby);
+
         return driverRepository.findAll(pageable)
                 .map(driverMapper::toGetDTO);
     }
