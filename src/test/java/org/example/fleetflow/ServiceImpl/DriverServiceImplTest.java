@@ -1,6 +1,5 @@
-package org.example.fleetflow.Service;
+package org.example.fleetflow.ServiceImpl;
 
-import lombok.AllArgsConstructor;
 import org.example.fleetflow.DTO.driver.DriverGetDTO;
 import org.example.fleetflow.entities.Driver;
 import org.example.fleetflow.mapper.DriverMapper;
@@ -20,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class DriverServiceTest {
+class DriverServiceImplTest {
     List<Driver> mockDriverList;
     List<DriverGetDTO> mockDriverListDTO;
     @BeforeEach
@@ -52,7 +51,7 @@ class DriverServiceTest {
     private DriverMapper driverMapper;
 
     @InjectMocks
-    private DriverService driverService;
+    private DriverServiceImpl driverServiceImpl;
 
     @Test
     @DisplayName("first test")
@@ -61,7 +60,7 @@ class DriverServiceTest {
 
         when(driverMapper.toGetDTO(mockDriverList.get(0))).thenReturn(mockDriverListDTO.get(0));
 
-        List<DriverGetDTO> result = driverService.getAllDriversAvailable();
+        List<DriverGetDTO> result = driverServiceImpl.getAllDriversAvailable();
 
         assertEquals(1, result.size());
         assertEquals(mockDriverListDTO,result);

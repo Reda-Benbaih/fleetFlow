@@ -1,4 +1,4 @@
-package org.example.fleetflow.Service;
+package org.example.fleetflow.ServiceImpl;
 
 import org.example.fleetflow.DTO.delivery.DeliveryGetDTO;
 import org.example.fleetflow.DTO.delivery.DeliveryPostDTO;
@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class DeliveryServiceTest {
+class DeliveryServiceImplTest {
 
     @Mock
     private DeliveryRepository deliveryRepository;
@@ -38,7 +38,7 @@ class DeliveryServiceTest {
     @Mock
     private DeliveryGetDTO deliveryGetDTO;
     @InjectMocks
-    private DeliveryService deliveryService;
+    private DeliveryServiceImpl deliveryService;
 
     DeliveryPutDTO deliveryPutDTO;
     DeliveryGetDTO deliveryGetDTOChanged;
