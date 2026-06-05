@@ -6,6 +6,7 @@ import org.example.fleetflow.DTO.client.ClientGetDTO;
 import org.example.fleetflow.DTO.client.ClientPostDTO;
 import org.example.fleetflow.DTO.client.ClientPutDTO;
 import org.example.fleetflow.Service.ClientService;
+import org.example.fleetflow.ServiceImpl.ClientServiceImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +16,10 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 public class ClientController {
 
-    private final ClientService clientService;
+    private final ClientServiceImpl clientService;
 
     @PostMapping
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ClientGetDTO ajouterClient(@Valid @RequestBody ClientPostDTO clientPostDTO) {
         return clientService.ajouterClient(clientPostDTO);
     }

@@ -31,8 +31,8 @@ public class ClientServiceImpl implements ClientService {
          Client client=clientMapper.toEntity(clientPostDTO);
          Client savedClient =clientRepository.save(client);
          return clientMapper.toGetDTO(savedClient);
-                                        }
-                                        @Override
+  }
+  @Override
   public Page<ClientGetDTO> getAllClient(int page , int size , String sort,String type){
 
       Sort sortby = type.equalsIgnoreCase("desc") ? Sort.by(sort).descending() : Sort.by(sort).ascending();
