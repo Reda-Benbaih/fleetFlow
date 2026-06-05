@@ -1,6 +1,7 @@
 package org.example.fleetflow.config;
 
 import lombok.RequiredArgsConstructor;
+import org.example.fleetflow.entities.Driver;
 import org.example.fleetflow.security.JwtAuthenticationFilter;
 import org.example.fleetflow.security.UserInfoService;
 import org.springframework.context.annotation.Bean;
@@ -49,7 +50,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
         http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
                 .authorizeHttpRequests(auth->auth
-                        .requestMatchers("/auth/**","/swagger-ui/**").permitAll())
+                        .requestMatchers("/auth/**","/swagger-ui/**").permitAll()
+                        .requestMatchers("/api/clients").hasAnyRole("ADMIN","MANAGER")
+                        .requestMatchers("/api/drivers").hasAnyRole("ADMIN", "DRIVER")
+                        .requestMatchers("/api/vehicles").hasAnyRole("ADMIN","DRIVER")
+                        .requestMatchers("/api/delivery").hasAnyRole("ADMIN","DRIVER","MANAGER")
+
+                        .anyRequest().authenticated())
 
                         .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         .authenticationProvider(authenticationProvider())
