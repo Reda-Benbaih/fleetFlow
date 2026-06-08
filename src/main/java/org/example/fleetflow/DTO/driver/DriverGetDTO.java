@@ -12,4 +12,5 @@ public class DriverGetDTO {
     private String name;
     private Long number;
     private Boolean available;
+    private String email;
 }

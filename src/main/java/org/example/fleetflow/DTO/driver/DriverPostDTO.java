@@ -1,5 +1,6 @@
 package org.example.fleetflow.DTO.driver;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -19,4 +20,9 @@ public class DriverPostDTO {
 
     @NotNull(message = "La disponibilité est obligatoire")
     private Boolean available;
+
+    @NotBlank(message = "L'email est obligatoire")
+    @Email(message = "Format d'email invalide")
+    private String email;
+
 }

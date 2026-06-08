@@ -2,23 +2,21 @@ package org.example.fleetflow.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Entity
 @Table(name = "client")
+@PrimaryKeyJoinColumn(name = "id")
 @Getter @Setter @AllArgsConstructor @NoArgsConstructor
-@Builder
-public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id ;
+@SuperBuilder // Changed from @Builder
+public class Client extends User {
 
     private String name;
-    private String email;
     private String city;
     private Long number;
 
-    @OneToMany(mappedBy = "client",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.PERSIST)
     private List<Delivery> deliveries;
 }

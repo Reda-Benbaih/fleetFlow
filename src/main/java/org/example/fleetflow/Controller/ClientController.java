@@ -5,9 +5,10 @@ import lombok.AllArgsConstructor;
 import org.example.fleetflow.DTO.client.ClientGetDTO;
 import org.example.fleetflow.DTO.client.ClientPostDTO;
 import org.example.fleetflow.DTO.client.ClientPutDTO;
-import org.example.fleetflow.Service.ClientService;
 import org.example.fleetflow.ServiceImpl.ClientServiceImpl;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,37 +21,42 @@ public class ClientController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ClientGetDTO ajouterClient(@Valid @RequestBody ClientPostDTO clientPostDTO) {
-        return clientService.ajouterClient(clientPostDTO);
+    public ResponseEntity<ClientGetDTO> ajouterClient(@Valid @RequestBody ClientPostDTO clientPostDTO) {
+        ClientGetDTO createdClient = clientService.ajouterClient(clientPostDTO);
+        return new ResponseEntity<>(createdClient, HttpStatus.CREATED);
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    public Page<ClientGetDTO> getAllClient(
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+    public ResponseEntity<Page<ClientGetDTO>> getAllClient(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "id") String sort,
             @RequestParam(defaultValue = "asc") String type
     ) {
-        return clientService.getAllClient(page, size, sort, type);
+        Page<ClientGetDTO> clients = clientService.getAllClient(page, size, sort, type);
+        return ResponseEntity.ok(clients);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    public ClientGetDTO getClientById(@PathVariable Integer id) {
-        return clientService.getClientById(id);
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+    public ResponseEntity<ClientGetDTO> getClientById(@PathVariable Integer id) {
+        ClientGetDTO client = clientService.getClientById(id);
+        return ResponseEntity.ok(client);
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    public ClientGetDTO updateClient(@PathVariable Integer id,
-                                    @Valid @RequestBody ClientPutDTO clientPutDTO) {
-        return clientService.updateClient(id, clientPutDTO);
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<ClientGetDTO> updateClient(@PathVariable Integer id,
+                                                     @Valid @RequestBody ClientPutDTO clientPutDTO) {
+        ClientGetDTO updatedClient = clientService.updateClient(id, clientPutDTO);
+        return ResponseEntity.ok(updatedClient);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    public void deleteClient(@PathVariable Integer id) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deleteClient(@PathVariable Integer id) {
         clientService.deleteClient(id);
+        return ResponseEntity.noContent().build();
     }
 }
